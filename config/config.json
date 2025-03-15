@@ -1,0 +1,15 @@
+{
+	"logging": {
+		"debug": true,
+		"common": false
+	},
+
+	"bot": {
+		"token": "",
+		"prefix": "hey"
+	},
+
+	"whitelisted": [
+		
+	]
+}
