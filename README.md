@@ -1,15 +1,15 @@
-# mfd cleaner
-discord self bot to attempt to detect ro-cleaner accounts
+# bo cleaner
+discord self bot to scrape servers, recreation of the ro-cleaner bot
 
 ## config
-### [main config](https://github.com/ChocolateDrink/mfd-cleaner/blob/main/config/config.json)
+### [main config](https://github.com/ChocolateDrink/bo-cleaner/blob/main/config/config.json)
 - **logging - debug:** whether to log debug output
 - **logging - common:** whether to log common debug output
 - **bot - token:** the token of the account the bot will run on
 - **bot - prefix:** the message prefix the bot will respond to
 - **whitelisted:** the user ids of people that are whitelisted to use the bot (array of strings)
 
-### [ignores](https://github.com/ChocolateDrink/mfd-cleaner/blob/main/config/ignore.json)
+### [ignores](https://github.com/ChocolateDrink/bo-cleaner/blob/main/config/ignore.json)
 - **servers:** the server ids the bot will ignore
 - **people:** the user ids of people the bot will ignore
 
