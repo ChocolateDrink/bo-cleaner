@@ -1,6 +1,25 @@
 # bo cleaner
 discord self bot to scrape servers, recreation of the ro-cleaner bot
 
+## How to Use
+1. Make sure you have [Node.js](https://nodejs.org/) installed.
+2. Clone the repository:
+```bash
+git clone https://github.com/ChocolateDrink/bo-cleaner
+```
+3. Go to the src folder
+```bash
+cd bo-cleaner/src
+```
+4. Install dependencies
+```bash
+npm install
+```
+5. Run the bot
+```bash
+node main.js
+```
+
 ## config
 ### [main config](https://github.com/ChocolateDrink/bo-cleaner/blob/main/config/config.json)
 - **logging - debug:** whether to log debug output
