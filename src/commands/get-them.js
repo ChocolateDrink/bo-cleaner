@@ -1,17 +1,25 @@
 const path = require('path');
 const fs = require('fs');
 
+const ignores = require('../../config/ignore.json');
 const consoleUtils = require('../utils/console');
 
 const red = consoleUtils.RED;
 const green = consoleUtils.GREEN;
+const yellow = consoleUtils.YELLOW;
 const reset = consoleUtils.RESET;
 
 module.exports = {
 	name: 'get-them',
-	desc: 'logs everyone in the current guild to a file',
+	desc: 'logs everyone in the current guild',
 	exec: async (data, _) => {
-		const everyone = await data.message.guild.members.fetch();
+		const guild = data.message.guild;
+		if (ignores.servers.includes(guild.id)) {
+			console.log(`${yellow}[GET THEM] this guild is ignored"${reset}`);
+			return;
+		}
+
+		const everyone = await guild.members.fetch();
 		if (everyone.size <= 1) {
 			console.warn(`${red}[GET THEM] there is no one${reset}`);
 			return;
@@ -26,9 +34,7 @@ module.exports = {
 
 		console.log(`[GET THEM] logging ${users.length} users`);
 
-		const guild = data.message.guild;
 		const name = guild.name.replace(/[<>:"/\\|?*]/g, '-');
-
 		const output = path.join(__dirname, '../../output/get-them', `${name} - ${guild.id}`);
 		if (!fs.existsSync(output)) {
 			fs.mkdirSync(output, { recursive: true });

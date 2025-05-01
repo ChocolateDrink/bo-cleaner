@@ -1,15 +1,17 @@
 const path = require('path');
 const fs = require('fs');
 
+const ignores = require('../../config/ignore.json');
 const consoleUtils = require('../utils/console');
 
 const red = consoleUtils.RED;
 const green = consoleUtils.GREEN;
+const yellow = consoleUtils.YELLOW;
 const reset = consoleUtils.RESET;
 
 module.exports = {
 	name: 'get-all',
-	desc: 'logs everyone in every guild to a file',
+	desc: 'logs everyone in every guild',
 	exec: async (data, _) => {
 		const guilds = data.bot.guilds.cache;
 		if (guilds.size === 0) {
@@ -20,13 +22,18 @@ module.exports = {
 		const allGuilds = [];
 
 		for (const guild of guilds.values()) {
+			if (ignores.servers.includes(guild.id)) {
+				console.log(`${yellow}[GET ALL] skipping ignored guild "${guild.name}"${reset}`);
+				continue;
+			}
+
 			const members = await guild.members.fetch();
 			if (members.size <= 1) {
 				console.warn(`${red}[GET ALL] there is no one in guild "${guild.name}"${reset}`);
 				continue;
 			}
 
-			const users = members.map(user => ({
+			const users = members.filter(user => !ignores.people.includes(user.user.id)).map(user => ({
 				userId: user.user.id,
 				userName: user.user.username,
 				displayName: user.displayName,
